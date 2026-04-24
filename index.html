@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department AI Chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center px-6 py-4 border-b border-gray-800">
+    <h1 class="text-lg font-semibold tracking-wide">Dept AI System</h1>
+    <span class="text-sm text-gray-400">HR Assistant Demo</span>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-1 flex flex-col items-center justify-center px-4">
+
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold mb-2">Ask your Department AI</h2>
+      <p class="text-gray-400">HR, Finance, IT insights powered by AI</p>
+    </div>
+
+    <!-- Chat Input Box -->
+    <div class="w-full max-w-2xl bg-gray-900 border border-gray-800 rounded-2xl p-3 flex items-center gap-2">
+      <input 
+        type="text" 
+        placeholder="Ask something like: How many employees are absent today?"
+        class="flex-1 bg-transparent outline-none text-white px-3"
+        id="chatInput"
+      />
+      <button 
+        class="bg-white text-black px-5 py-2 rounded-xl font-medium hover:bg-gray-300 transition"
+        onclick="sendMessage()"
+      >
+        Send
+      </button>
+    </div>
+
+    <!-- Suggestion chips -->
+    <div class="flex flex-wrap gap-2 mt-6 justify-center">
+      <button class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-300">Absent today</button>
+      <button class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-300">Late employees</button>
+      <button class="text-sm bg-gray-800 px-3 py-1 rounded-full text-gray-300">Total staff</button>
+    </div>
+
+    <!-- Response box -->
+    <div id="responseBox" class="mt-10 w-full max-w-2xl text-gray-300"></div>
+
+  </main>
+
+  <!-- Script -->
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const responseBox = document.getElementById('responseBox');
+
+      const message = input.value.trim();
+      if (!message) return;
+
+      responseBox.innerHTML = `
+        <div class=\"bg-gray-900 border border-gray-800 p-4 rounded-xl\">
+          <p class=\"text-gray-400 text-sm mb-1\">You asked:</p>
+          <p class=\"text-white\">${message}</p>
+          <p class=\"text-gray-500 mt-3 text-sm\">(Backend AI response will appear here)</p>
+        </div>
+      `;
+
+      input.value = '';
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
+
+</body>
+</html>
